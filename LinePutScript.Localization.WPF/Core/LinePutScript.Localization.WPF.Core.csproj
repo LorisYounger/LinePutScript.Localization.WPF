@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>LinePutScript.Localization.WPF</AssemblyName>
+    <RootNamespace>LinePutScript.Localization.WPF</RootNamespace>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+ <ItemGroup>
+    <Compile Include="..\LocalizeCore.cs" />
+    <Compile Include="..\Extension\BoolExtension.cs" Link="Extension\BoolExtension.cs" />
+    <Compile Include="..\Extension\DbeExtension.cs" Link="Extension\DbeExtension.cs" />
+    <Compile Include="..\Extension\Int64Extension.cs" Link="Extension\Int64Extension.cs" />
+    <Compile Include="..\Extension\IntExtension.cs" Link="Extension\IntExtension.cs" />
+    <Compile Include="..\Extension\StrExtension.cs" Link="Extension\StrExtension.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="..\Extension\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="LinePutScript" Version="1.8.2" />
+  </ItemGroup>
+</Project>

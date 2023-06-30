@@ -1,0 +1,50 @@
+﻿<Window x:Class="Demo.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:Demo"
+        xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF" mc:Ignorable="d"
+        Title="{ll:Str 翻译DEMO}" Height="400" Width="500" FontSize="16">
+    <TabControl x:Name="TabMain">
+        <TabItem Header="{ll:Str 基本测试}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="{ll:Str 请选择当前语言}" Padding="0" VerticalAlignment="Center" Margin="5,0,0,0" />
+                <ComboBox x:Name="CombSelect" Grid.Row="1" />
+                <Button Grid.Row="2" Content="{ll:Str 应用当前选择}" Click="SwtichTrans_Click" />
+                <Label Grid.Row="3" Content="{ll:Str 请输入要显示在下方的内容}" Padding="0" VerticalAlignment="Center"
+                        Margin="5,0,0,0" />
+                <TextBox Grid.Row="4" Name="txtInput" Text="ces"/>
+                <Label Grid.Row="5" Content="{ll:Str 显示的内容是\:{0}, ValueSource={Binding Text,ElementName=txtInput}}" VerticalAlignment="Center" Padding="0"
+                        Margin="5,0,0,0" />
+                <Button Grid.Row="6" Content="{ll:Str 导出当前未翻译的列表}" Click="transOut_Click" />
+            </Grid>
+        </TabItem>
+        <TabItem Header="{ll:Str 辅助功能}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="{ll:Str 快捷翻译当前软件}" Grid.ColumnSpan="1" FontSize="{ll:Dbe smsize, DefValue=16}" />
+                <Button Content="{ll:Str 导入}" Grid.Column="1" Click="Input_Click" />
+                <Button Content="{ll:Str 导出}" Grid.Column="2" Click="Output_Click" />
+                <TextBox x:Name="txt1" Grid.Row="1" AcceptsReturn="True" />
+                <TextBox x:Name="txt2" Grid.Row="1" AcceptsReturn="True" Grid.Column="1" Grid.ColumnSpan="2" />
+            </Grid>
+        </TabItem>
+    </TabControl>
+   
+</Window>
