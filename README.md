@@ -85,6 +85,19 @@ LocalizeCore.StoreTranslationList;
 LocalizeCore.StoreTranslationListToLPS();
 ```
 
+### 代码中翻译
+
+```C#
+//调用方法
+LocalizeCore.Translate("学习完成啦, 累计学会了 {0:f2} 经验值\n共计花费了{1}分钟", GetCount * 1.2, MaxTime);
+
+//或者用快捷方法
+"学习完成啦, 累计学会了 {0:f2} 经验值\n共计花费了{1}分钟".Translate(GetCount * 1.2, MaxTime);
+
+//获取值
+LocalizeCore.GetDouble("Size")
+```
+
 ### 翻译接口
 
 ```C#
@@ -101,9 +114,11 @@ LocalizeCore.TranslateFunc = (txt) => {
 
 ![image-20230630134103494](README.assets/image-20230630134103494.png)
 
-## 详细了解: Demo
+## Demo 和 案例
 
-详细请参见DEMO文件
+详细示例请参见DEMO文件
+
+更多案例参见 (VPet)[https://github.com/LorisYounger/VPet]
 
 ## 其他
 

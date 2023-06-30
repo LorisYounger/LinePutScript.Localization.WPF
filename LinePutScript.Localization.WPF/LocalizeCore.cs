@@ -24,7 +24,7 @@ namespace LinePutScript.Localization.WPF
         /// </summary>
         public static HashSet<string> StoreTranslationList = new HashSet<string>();
         /// <summary>
-        /// 讲未翻译的文本导出成LPS格式,可以直接储存
+        /// 将未翻译的文本导出成LPS格式,可以直接储存
         /// </summary>
         public static string StoreTranslationListToLPS()
         {
@@ -142,14 +142,15 @@ namespace LinePutScript.Localization.WPF
         /// </summary>
         /// <param name="key">翻译内容</param>
         /// <returns>翻译后的文本</returns>
-        public static string Translate(string key) => Find(key)?.GetString() ?? key;
+        public static string Translate(this string key) => Find(key)?.GetString() ?? key;
+
         /// <summary>
         /// 翻译文本
         /// </summary>
         /// <param name="key">翻译内容</param>
         /// <param name="replace">替换内容 {0:f2}{1}..</param>
         /// <returns>翻译后的文本</returns>
-        public static string Translate(string key, params object[] replace) => string.Format(Translate(key), replace);
+        public static string Translate(this string key, params object[] replace) => string.Format(Translate(key), replace);
         /// <summary>
         /// 获得Double数据
         /// </summary>
@@ -210,6 +211,8 @@ namespace LinePutScript.Localization.WPF
         /// <param name="key">匹配名称</param>
         /// <param name="value">储存值</param>
         public static void AddCulture(string culture, string key, string value) => AddCulture(culture, new Line(key, value));
+
+       
 
         /// <summary>
         /// 通知更改
