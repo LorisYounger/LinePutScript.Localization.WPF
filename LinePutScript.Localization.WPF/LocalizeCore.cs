@@ -147,17 +147,9 @@ namespace LinePutScript.Localization.WPF
         /// 翻译文本
         /// </summary>
         /// <param name="key">翻译内容</param>
-        /// <param name="replace">替换内容 {0}{1}..</param>
+        /// <param name="replace">替换内容 {0:f2}{1}..</param>
         /// <returns>翻译后的文本</returns>
-        public static string Translate(string key, params string[] replace)
-        {
-            var str = Translate(key);
-            for (int i = 0; i < replace.Length; i++)
-            {
-                str = str.Replace($"{{{i}}}", replace[i]);
-            }
-            return str;
-        }
+        public static string Translate(string key, params object[] replace) => string.Format(Translate(key), replace);
         /// <summary>
         /// 获得Double数据
         /// </summary>
@@ -224,12 +216,24 @@ namespace LinePutScript.Localization.WPF
         /// </summary>
         public class NotifyChanged : INotifyPropertyChanged
         {
+            /// <summary>
+            /// PropertyChanged
+            /// </summary>
             public event PropertyChangedEventHandler? PropertyChanged;
+            /// <summary>
+            /// 通知更改
+            /// </summary>
             public void Notify()
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
             }
+            /// <summary>
+            /// 当前本地化语言
+            /// </summary>
             public string CurrentCulture => currentCulture;
+            /// <summary>
+            /// 获取隐藏的 localizations
+            /// </summary>
             public Dictionary<string, LPS_D> Localizations => localizations;
         }
         /// <summary>

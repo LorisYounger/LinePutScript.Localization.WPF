@@ -26,7 +26,7 @@ namespace LinePutScript.Localization.WPF
         /// <summary>
         /// 替换词
         /// </summary>
-        public string? Value { get; set; }
+        public object? Value { get; set; }
         /// <summary>
         /// 替换词
         /// </summary>
@@ -54,7 +54,7 @@ namespace LinePutScript.Localization.WPF
         /// </summary>
         /// <param name="keySource">查找值</param>
         /// <param name="value">默认值</param>
-        public StrExtension(Binding keySource, string value)
+        public StrExtension(Binding keySource, object value)
         {
             KeySource = keySource;
             Value = value;
@@ -64,7 +64,7 @@ namespace LinePutScript.Localization.WPF
         /// </summary>
         /// <param name="key">查找值</param>
         /// <param name="value">默认值</param>
-        public StrExtension(string key, string value)
+        public StrExtension(string key, object value)
         {
             Key = key;
             Value = value;
@@ -101,9 +101,12 @@ namespace LinePutScript.Localization.WPF
         //    }
         //    else
         //        return null;
-
         //}
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serviceProvider"></param>
+        /// <returns></returns>
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             MultiBinding Binding = new MultiBinding
@@ -135,11 +138,11 @@ namespace LinePutScript.Localization.WPF
             /// <summary>
             /// 替换词
             /// </summary>
-            public string? Value { get; set; }
+            public object? Value { get; set; }
             /// <summary>
             /// 生成一个WPF绑定转换成字符串, 开发者无需使用这个
             /// </summary>
-            public LocalConverter(string? key = null, string? value = null)
+            public LocalConverter(string? key = null, object? value = null)
             {
                 Key = key;
                 Value = value;
@@ -156,19 +159,18 @@ namespace LinePutScript.Localization.WPF
                 {
                     k = System.Convert.ToString(values[1]);
                 }
-                string? v = null;
+                object? v = null;
                 if (Value != null)
                 {
                     v = Value;
                 }
                 else if (Key != null && values.Length == 2)
                 {
-                    if (Key != null)
-                        v = values[1] as string;
+                    v = values[1];
                 }
                 else if (values.Length == 3)
                 {
-                    v = values[2] as string;
+                    v = values[2];
                 }
                 if (v == null)
                     return LocalizeCore.Translate(k ?? "");

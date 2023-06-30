@@ -81,7 +81,11 @@ namespace LinePutScript.Localization.WPF
             Key = key;
             DefValueSource = defvalueSource;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serviceProvider"></param>
+        /// <returns></returns>
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             MultiBinding Binding = new MultiBinding

@@ -1,4 +1,7 @@
 # LinePutScript.Localization.WPF
+
+<img src="Localization.png" alt="Localization" style="zoom:50%;" />
+
 WPF本地化类库, 轻松让你的wpf应用程序支持多语言
 
 * 支持文本和数值 - 不同语言的控件位置大小
@@ -98,6 +101,13 @@ LocalizeCore.TranslateFunc = (txt) => {
 
 ![image-20230630134103494](README.assets/image-20230630134103494.png)
 
-### 详细了解: Demo
+## 详细了解: Demo
 
 详细请参见DEMO文件
+
+## 其他
+
+附语言表 https://learn.microsoft.com/en-us/windows/win32/wmformat/language-strings
+
+顺带一提, 语言采用的是向上兼容, 不用担心填写 `zh-CN` 还是 `zh-Hans` 还是 `zh`, 均会历遍到
+

@@ -15,16 +15,20 @@
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="{ll:Str 请选择当前语言}" Padding="0" VerticalAlignment="Center" Margin="5,0,0,0" />
+                <Label Grid.Row="0" Content="{ll:Str '请选择当前语言'}" Padding="0" VerticalAlignment="Center" Margin="5,0,0,0" />
                 <ComboBox x:Name="CombSelect" Grid.Row="1" />
                 <Button Grid.Row="2" Content="{ll:Str 应用当前选择}" Click="SwtichTrans_Click" />
                 <Label Grid.Row="3" Content="{ll:Str 请输入要显示在下方的内容}" Padding="0" VerticalAlignment="Center"
                         Margin="5,0,0,0" />
-                <TextBox Grid.Row="4" Name="txtInput" Text="ces"/>
-                <Label Grid.Row="5" Content="{ll:Str 显示的内容是\:{0}, ValueSource={Binding Text,ElementName=txtInput}}" VerticalAlignment="Center" Padding="0"
-                        Margin="5,0,0,0" />
+                <TextBox Grid.Row="4" Name="txtInput" Text="ces" />
+                <Label Grid.Row="5" Content="{ll:Str '显示的内容是:{0}', ValueSource={Binding Text,ElementName=txtInput}}"
+                        VerticalAlignment="Center" Padding="0" Margin="5,0,0,0" />
                 <Button Grid.Row="6" Content="{ll:Str 导出当前未翻译的列表}" Click="transOut_Click" />
+                <Label Grid.Row="7"
+                        Content="{ll:Str '当前宽度是:{0:F2}', ValueSource={Binding ActualWidth,ElementName=txtInput}}"
+                        Padding="0" VerticalAlignment="Center" Margin="5,0,0,0" />
             </Grid>
         </TabItem>
         <TabItem Header="{ll:Str 辅助功能}">
@@ -46,5 +50,5 @@
             </Grid>
         </TabItem>
     </TabControl>
-   
+
 </Window>
