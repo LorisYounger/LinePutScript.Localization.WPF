@@ -212,7 +212,7 @@ namespace LinePutScript.Localization.WPF
         /// <param name="value">储存值</param>
         public static void AddCulture(string culture, string key, string value) => AddCulture(culture, new Line(key, value));
 
-       
+
 
         /// <summary>
         /// 通知更改
@@ -231,9 +231,9 @@ namespace LinePutScript.Localization.WPF
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
             }
             /// <summary>
-            /// 当前本地化语言
+            /// 没啥用的文本,用于检测绑定
             /// </summary>
-            public string CurrentCulture => currentCulture;
+            public string TmpString { get; set; } = "";
             /// <summary>
             /// 获取隐藏的 localizations
             /// </summary>

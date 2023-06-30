@@ -117,7 +117,7 @@ namespace LinePutScript.Localization.WPF
             Binding.Bindings.Add(new Binding()
             {
                 Source = LocalizeCore.BindingNotify,
-                Path = new PropertyPath("CurrentCulture")
+                Path = new PropertyPath("TmpString")
             });
             if (KeySource != null)
             {
@@ -178,7 +178,7 @@ namespace LinePutScript.Localization.WPF
                     return LocalizeCore.Translate(k ?? "", v);
             }
 
-            public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) => throw new NotImplementedException();
+            public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) => new object[] { value.ToString() ?? "" };
         }
     }
 }

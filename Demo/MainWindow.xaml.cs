@@ -47,7 +47,7 @@ namespace Demo
         private void Input_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "翻译文本|*.lps";
+            ofd.Filter = "翻译文本".Translate() + "|*.lps";
             if (ofd.ShowDialog() == true)
             {
                 //LocalizeCore.AddCulture(ofd.SafeFileName.Split('.')[0], new LPS_D(File.ReadAllText(ofd.FileName)));
