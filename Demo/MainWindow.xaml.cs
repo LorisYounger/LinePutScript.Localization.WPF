@@ -16,6 +16,7 @@ namespace Demo
     {
         public MainWindow()
         {
+            
             // 本地化:
             // 开启翻译存储, 储存所有未翻译的文本,可以在 LocalizeCore.StoreTranslationList 中查看所有未翻译过的文本
             LocalizeCore.StoreTranslation = true;
@@ -30,6 +31,15 @@ namespace Demo
             foreach (var culture in LocalizeCore.AvailableCultures)
                 CombSelect.Items.Add(culture);
             CombSelect.SelectedItem = LocalizeCore.CurrentCulture;
+
+            //txt1.PreviewMouseWheel += (s, e) =>
+            //{
+            //    txt2.ScrollToVerticalOffset(txt1.VerticalOffset);
+            //};
+            //txt2.PreviewMouseWheel += (s, e) =>
+            //{
+            //    txt1.ScrollToVerticalOffset(txt2.VerticalOffset);
+            //};
         }
 
         private void transOut_Click(object sender, RoutedEventArgs e)
@@ -75,7 +85,7 @@ namespace Demo
                 string[] lines2 = txt2.Text.Replace("\r", "").Split('\n');
                 if(lines1.Length != lines2.Length)
                 {
-                    MessageBox.Show(LocalizeCore.Translate("行数不一致"));
+                    MessageBox.Show($"{lines1.Length} != {lines2.Length}",LocalizeCore.Translate("行数不一致"));
                     return;
                 }
                 for (int i = 0; i < lines1.Length; i++)
@@ -89,5 +99,6 @@ namespace Demo
         {
             LocalizeCore.LoadCulture((string)CombSelect.SelectedItem);
         }
+
     }
 }

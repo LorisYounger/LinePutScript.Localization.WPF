@@ -29,8 +29,12 @@ namespace LinePutScript.Localization.WPF
         public static string StoreTranslationListToLPS()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (string notrans in LocalizeCore.StoreTranslationList)
-                sb.AppendLine($"{notrans}#{notrans}:|");
+            foreach (string notrans in StoreTranslationList)
+            {
+                var str = notrans.Replace("\n", @"\n");
+                sb.AppendLine($"{str}#{str}:|");
+            }
+
             return sb.ToString();
         }
         /// <summary>
@@ -172,20 +176,25 @@ namespace LinePutScript.Localization.WPF
         /// </summary>
         /// <param name="culture">区域性文本</param>
         /// <param name="file">本地化文件</param>
-        public static void AddCulture(string culture, ILPS file)
+        public static void AddCulture(string culture, IEnumerable<ILine> file)
         {
             if (localizations.TryGetValue(culture, out var lps))
             {
-                lps.AddRange(file);
+                foreach (ILine item in file)
+                {
+                    item.Name = item.Name.Replace(@"\n", "\n");
+                    lps.Add(item);
+                }
             }
             else
-            if (file is LPS_D lpsd)
             {
+                LPS_D lpsd = new LPS_D();
+                foreach (ILine item in file)
+                {
+                    item.Name = item.Name.Replace(@"\n", "\n");
+                    lpsd.Add(item);
+                }
                 localizations.Add(culture, lpsd);
-            }
-            else
-            {
-                localizations.Add(culture, new LPS_D(file));
             }
         }
         /// <summary>
@@ -195,6 +204,7 @@ namespace LinePutScript.Localization.WPF
         /// <param name="line">单行</param>
         public static void AddCulture(string culture, ILine line)
         {
+            line.Name = line.Name.Replace(@"\n", "\n");
             if (localizations.TryGetValue(culture, out var lps))
             {
                 lps.Add(line);

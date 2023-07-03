@@ -45,8 +45,16 @@
                 <Label Content="{ll:Str 快捷翻译当前软件}" Grid.ColumnSpan="1" FontSize="{ll:Dbe smsize, DefValue=16}" />
                 <Button Content="{ll:Str 导入}" Grid.Column="1" Click="Input_Click" />
                 <Button Content="{ll:Str 导出}" Grid.Column="2" Click="Output_Click" />
-                <TextBox x:Name="txt1" Grid.Row="1" AcceptsReturn="True" />
-                <TextBox x:Name="txt2" Grid.Row="1" AcceptsReturn="True" Grid.Column="1" Grid.ColumnSpan="2" />
+                <ScrollViewer Grid.Row="1" Grid.ColumnSpan="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="txt1" AcceptsReturn="True" />
+                        <TextBox x:Name="txt2" AcceptsReturn="True" Grid.Column="1" Grid.ColumnSpan="2" />
+                </ScrollViewer>
+
             </Grid>
         </TabItem>
     </TabControl>
