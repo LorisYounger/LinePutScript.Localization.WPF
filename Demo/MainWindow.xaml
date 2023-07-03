@@ -53,6 +53,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBox x:Name="txt1" AcceptsReturn="True" />
                         <TextBox x:Name="txt2" AcceptsReturn="True" Grid.Column="1" Grid.ColumnSpan="2" />
+                    </Grid>
                 </ScrollViewer>
 
             </Grid>

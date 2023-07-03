@@ -31,11 +31,23 @@ namespace LinePutScript.Localization.WPF
             StringBuilder sb = new StringBuilder();
             foreach (string notrans in StoreTranslationList)
             {
-                var str = notrans.Replace("\n", @"\n");
+                var str = notrans.Replace("\n", @"\n").Replace("\r", @"\r");
                 sb.AppendLine($"{str}#{str}:|");
             }
 
             return sb.ToString();
+        }
+        /// <summary>
+        /// 将未翻译的文本导出成List string格式, 方便查看
+        /// </summary>
+        public static List<string> StoreTranslationListToList()
+        {
+            List<string> tmp = new List<string>();
+            foreach (string notrans in StoreTranslationList)
+            {
+                tmp.Add(notrans.Replace("\n", @"\n").Replace("\r", @"\r"));
+            }
+            return tmp;
         }
         /// <summary>
         /// 当前本地化语言
@@ -182,7 +194,8 @@ namespace LinePutScript.Localization.WPF
             {
                 foreach (ILine item in file)
                 {
-                    item.Name = item.Name.Replace(@"\n", "\n");
+                    item.Name = item.Name.Replace(@"\n", "\n").Replace(@"\r", "\r");
+                    item.Info = item.Info.Replace(@"\n", "\n").Replace(@"\r", "\r");
                     lps.Add(item);
                 }
             }
@@ -191,7 +204,8 @@ namespace LinePutScript.Localization.WPF
                 LPS_D lpsd = new LPS_D();
                 foreach (ILine item in file)
                 {
-                    item.Name = item.Name.Replace(@"\n", "\n");
+                    item.Name = item.Name.Replace(@"\n", "\n").Replace(@"\r", "\r");
+                    item.Info = item.Info.Replace(@"\n", "\n").Replace(@"\r", "\r");
                     lpsd.Add(item);
                 }
                 localizations.Add(culture, lpsd);
@@ -204,7 +218,8 @@ namespace LinePutScript.Localization.WPF
         /// <param name="line">单行</param>
         public static void AddCulture(string culture, ILine line)
         {
-            line.Name = line.Name.Replace(@"\n", "\n");
+            line.Name = line.Name.Replace(@"\n", "\n").Replace(@"\r", "\r");
+            line.Info = line.Info.Replace(@"\n", "\n").Replace(@"\r", "\r");
             if (localizations.TryGetValue(culture, out var lps))
             {
                 lps.Add(line);
