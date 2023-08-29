@@ -195,7 +195,7 @@ namespace LinePutScript.Localization.WPF
                 foreach (ILine item in file)
                 {
                     item.Name = item.Name.Replace(@"\n", "\n").Replace(@"\r", "\r");
-                    item.Info = item.Info.Replace(@"\n", "\n").Replace(@"\r", "\r");
+                    item.info = item.info.Replace(@"\n", "\n").Replace(@"\r", "\r");
                     lps.Add(item);
                 }
             }
@@ -205,7 +205,7 @@ namespace LinePutScript.Localization.WPF
                 foreach (ILine item in file)
                 {
                     item.Name = item.Name.Replace(@"\n", "\n").Replace(@"\r", "\r");
-                    item.Info = item.Info.Replace(@"\n", "\n").Replace(@"\r", "\r");
+                    item.info = item.info.Replace(@"\n", "\n").Replace(@"\r", "\r");
                     lpsd.Add(item);
                 }
                 localizations.Add(culture, lpsd);

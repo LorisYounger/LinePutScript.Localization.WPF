@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:Demo"
         xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF" mc:Ignorable="d"
-        Title="{ll:Str 翻译DEMO}" Height="400" Width="500" FontSize="16">
+        Title="{ll:Str 翻译DEMO}" Height="400" Width="500" FontSize="16" Closing="Window_Closing">
     <TabControl x:Name="TabMain">
         <TabItem Header="{ll:Str 基本测试}">
             <Grid>
@@ -31,7 +31,7 @@
                         Padding="0" VerticalAlignment="Center" Margin="5,0,0,0" />
             </Grid>
         </TabItem>
-        <TabItem Header="{ll:Str 辅助功能}">
+        <TabItem Header="{ll:Str 快速翻译}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
@@ -48,15 +48,51 @@
                 <ScrollViewer Grid.Row="1" Grid.ColumnSpan="3">
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="txt1" AcceptsReturn="True" />
-                        <TextBox x:Name="txt2" AcceptsReturn="True" Grid.Column="1" Grid.ColumnSpan="2" />
+                        <TextBox AcceptsReturn="True" IsReadOnly="True" SizeChanged="linet1_SizeChanged" />
+                        <TextBox x:Name="txt1" AcceptsReturn="True" Grid.Column="1" HorizontalScrollBarVisibility="Auto" />
+                        <TextBox x:Name="txt2" AcceptsReturn="True" Grid.Column="2" Grid.ColumnSpan="1"
+                                HorizontalScrollBarVisibility="Auto" />
+                        <GridSplitter Grid.Column="1" Width="5" />
                     </Grid>
                 </ScrollViewer>
 
             </Grid>
+        </TabItem>
+        <TabItem Header="{ll:Str 查找}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+                <TextBox x:Name="tbseach" KeyDown="tbseach_KeyDown" />
+                <ScrollViewer Grid.Row="1" Grid.ColumnSpan="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="fline" AcceptsReturn="True" IsReadOnly="True" />
+                        <TextBox x:Name="findtxt1" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto"
+                                IsReadOnly="True" Grid.Column="1"/>
+                        <TextBox x:Name="findtxt2" AcceptsReturn="True" Grid.Column="2"
+                                IsReadOnly="True" HorizontalScrollBarVisibility="Auto" />
+                        <GridSplitter Grid.Column="1" Width="5" />
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+        </TabItem>
+        <TabItem Header="{ll:Str 辅助功能}">
+            <StackPanel>
+                <Button Content="{ll:Str 提取CS中所有翻译文本}" Click="GetAllCSTrans_Click" />
+                <Button Content="{ll:Str 从文件中去重}" Click="RemoveFromFile_Click" />
+                <Button Content="{ll:Str 去重}" Click="RemoveReplice_Click" />
+                <Button Content="{ll:Str 读取LPS数据}" Click="ReadLPSFile" />
+            </StackPanel>
         </TabItem>
     </TabControl>
 

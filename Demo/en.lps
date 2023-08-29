@@ -12,3 +12,10 @@
 行数不一致#Inconsistent number of rows:|
 smsize#12:|
 翻译文本#Translation Text:|
+查找#Find:|
+是否关闭?#Close?:|
+当前宽度是:{0:F2}#The current width is: {0:F2}:|
+快速翻译#Quick translation:|
+提取CS中所有翻译文本#Extract all translated texts from *.cs:|
+从文件中去重#Remove duplicates from translate files:|
+读取LPS数据#Read *.LPS data:|
