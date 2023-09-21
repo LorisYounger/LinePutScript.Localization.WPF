@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Odbc;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -242,7 +243,7 @@ namespace Demo
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "翻译文本".Translate() + "|*.lps";
-
+            ofd.Multiselect = true;
             if (ofd.ShowDialog() == true)
             {
                 List<string> set = new List<string>();
@@ -251,10 +252,11 @@ namespace Demo
                 //{
                 //    set.Add(str);
                 //}
-                foreach (var line in new LPS_D(File.ReadAllText(ofd.FileName)))
-                {
-                    set.Remove(line.Name);
-                }
+                foreach (string fn in ofd.FileNames)
+                    foreach (var line in new LPS_D(File.ReadAllText(fn)))
+                    {
+                        set.Remove(line.Name);
+                    }
                 txt1.Text = string.Join("\r\n", set);
                 txt2.Text = txt1.Text;
             }
