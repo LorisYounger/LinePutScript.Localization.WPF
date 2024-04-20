@@ -56,23 +56,23 @@ namespace LinePutScript.Localization.WPF
         {
             get => currentCulture; set
             {
-                if (localizations.TryGetValue(value, out var lps))
+                if (Localizations.TryGetValue(value, out var lps))
                 {
-                    currentLPS = lps;
+                    CurrentLPS = lps;
                     currentCulture = value;
                 }
                 else
                 {
                     currentCulture = "null";
-                    currentLPS = null;
+                    CurrentLPS = null;
                 }
                 BindingNotify.Notify();
             }
         }
 
-        private static LPS_D? currentLPS;
+        public static LPS_D? CurrentLPS;
         private static string currentCulture = "null";
-        private static Dictionary<string, LPS_D> localizations = new Dictionary<string, LPS_D>();
+        public static Dictionary<string, LPS_D> Localizations = new Dictionary<string, LPS_D>();
 
         /// <summary>
         /// 手动代码实现的本地化语言
@@ -82,7 +82,7 @@ namespace LinePutScript.Localization.WPF
         /// <summary>
         /// 当前有的本地化语言
         /// </summary>
-        public static string[] AvailableCultures => localizations.Keys.ToArray();
+        public static string[] AvailableCultures => Localizations.Keys.ToArray();
 
         /// <summary>
         /// 加载当前电脑的默认本地化语言
@@ -97,14 +97,14 @@ namespace LinePutScript.Localization.WPF
             if (culture == null || string.IsNullOrWhiteSpace(culture.Name))
             {
                 currentCulture = "null";
-                currentLPS = null;
+                CurrentLPS = null;
                 BindingNotify.Notify();
                 return;
             }
-            if (localizations.TryGetValue(culture.Name, out LPS_D? lps))
+            if (Localizations.TryGetValue(culture.Name, out LPS_D? lps))
             {
                 currentCulture = culture.Name;
-                currentLPS = lps;
+                CurrentLPS = lps;
                 BindingNotify.Notify();
             }
             else
@@ -118,15 +118,15 @@ namespace LinePutScript.Localization.WPF
         /// <param name="culture">区域性文本</param>
         public static void LoadCulture(string culture)
         {
-            if (localizations.TryGetValue(culture, out LPS_D? lps))
+            if (Localizations.TryGetValue(culture, out LPS_D? lps))
             {
                 currentCulture = culture;
-                currentLPS = lps;
+                CurrentLPS = lps;
             }
             else
             {
                 currentCulture = "null";
-                currentLPS = null;
+                CurrentLPS = null;
             }
             BindingNotify.Notify();
 
@@ -138,16 +138,16 @@ namespace LinePutScript.Localization.WPF
         /// <returns>返回的数据</returns>
         public static ISetObject? Find(string key)
         {
-            if (currentLPS != null && currentLPS.Assemblage.TryGetValue(key, out var line))
+            if (CurrentLPS != null && CurrentLPS.Assemblage.TryGetValue(key, out var line))
                 return line;
             if (StoreTranslation)
                 StoreTranslationList.Add(key);
             if (TranslateFunc != null)
             {
                 string? str = TranslateFunc(key);
-                if (str != null && currentLPS != null)
+                if (str != null && CurrentLPS != null)
                 {
-                    currentLPS.Add(new Line(key, str));
+                    CurrentLPS.Add(new Line(key, str));
                     return new SetObject(str);
                 }
             }
@@ -190,7 +190,7 @@ namespace LinePutScript.Localization.WPF
         /// <param name="file">本地化文件</param>
         public static void AddCulture(string culture, IEnumerable<ILine> file)
         {
-            if (localizations.TryGetValue(culture, out var lps))
+            if (Localizations.TryGetValue(culture, out var lps))
             {
                 foreach (ILine item in file)
                 {
@@ -208,7 +208,7 @@ namespace LinePutScript.Localization.WPF
                     item.info = item.info.Replace(@"\n", "\n").Replace(@"\r", "\r");
                     lpsd.Add(item);
                 }
-                localizations.Add(culture, lpsd);
+                Localizations.Add(culture, lpsd);
             }
         }
         /// <summary>
@@ -220,13 +220,13 @@ namespace LinePutScript.Localization.WPF
         {
             line.Name = line.Name.Replace(@"\n", "\n").Replace(@"\r", "\r");
             line.Info = line.Info.Replace(@"\n", "\n").Replace(@"\r", "\r");
-            if (localizations.TryGetValue(culture, out var lps))
+            if (Localizations.TryGetValue(culture, out var lps))
             {
                 lps.Add(line);
             }
             else
             {
-                localizations.Add(culture, new LPS_D(line));
+                Localizations.Add(culture, new LPS_D(line));
             }
         }
         /// <summary>
@@ -260,9 +260,9 @@ namespace LinePutScript.Localization.WPF
             /// </summary>
             public string TmpString { get; set; } = "";
             /// <summary>
-            /// 获取隐藏的 localizations
+            /// 获取隐藏的 Localizations
             /// </summary>
-            public Dictionary<string, LPS_D> Localizations => localizations;
+            public Dictionary<string, LPS_D> Localizations => LocalizeCore.Localizations;
         }
         /// <summary>
         /// 绑定通知更改 PropertyChanged

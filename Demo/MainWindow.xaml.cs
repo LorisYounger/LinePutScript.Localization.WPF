@@ -4,6 +4,7 @@ using System.Data.Odbc;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -293,6 +294,42 @@ namespace Demo
             list.Remove("");
             txt1.Text = string.Join("\r\n", list);
             txt2.Text = txt1.Text;
+        }
+
+        private void RemoveFromFolder_Click(object sender, RoutedEventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.Filter = "Folders|*.*";
+            ofd.AddExtension = false;
+            ofd.CheckFileExists = false;
+            ofd.DereferenceLinks = true;
+            ofd.Multiselect = false;
+            if (ofd.ShowDialog() == true)
+            {
+                var set = new HashSet<string>();
+                RemoveFF(new FileInfo(ofd.FileName).Directory, set);
+                txt1.Text = string.Join("\r\n", set);
+                txt2.Text = txt1.Text;
+                TabMain.SelectedIndex = 1;
+            }
+        }
+        public static void RemoveFF(DirectoryInfo directory, HashSet<string> Set)
+        {
+            foreach (var fi in directory.GetFiles("*.cs"))
+            {
+                RemoveFF(fi, Set);
+            }
+            foreach (var di in directory.GetDirectories())
+            {
+                RemoveFF(di, Set);
+            }
+        }
+        public static void RemoveFF(FileInfo file, HashSet<string> Set)
+        {
+            foreach (var line in new LPS_D(File.ReadAllText(file.FullName)))
+            {
+                Set.Remove(line.Name);
+            }
         }
     }
 }

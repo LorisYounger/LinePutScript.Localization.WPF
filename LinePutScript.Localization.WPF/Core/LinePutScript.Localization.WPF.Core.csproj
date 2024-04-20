@@ -23,6 +23,6 @@
     <Folder Include="..\Extension\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="LinePutScript" Version="1.8.2" />
+    <PackageReference Include="LinePutScript" Version="1.8.3" />
   </ItemGroup>
 </Project>
