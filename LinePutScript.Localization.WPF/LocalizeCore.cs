@@ -136,8 +136,10 @@ namespace LinePutScript.Localization.WPF
         /// </summary>
         /// <param name="key">查找值</param>
         /// <returns>返回的数据</returns>
-        public static ISetObject? Find(string key)
+        public static ISetObject? Find(string? key)
         {
+            if (key == null)
+                return null;
             if (CurrentLPS != null && CurrentLPS.Assemblage.TryGetValue(key, out var line))
                 return line;
             if (StoreTranslation)
@@ -158,7 +160,7 @@ namespace LinePutScript.Localization.WPF
         /// </summary>
         /// <param name="key">翻译内容</param>
         /// <returns>翻译后的文本</returns>
-        public static string Translate(this string key) => Find(key)?.GetString() ?? key;
+        public static string Translate(this string? key) => Find(key)?.GetString() ?? key ?? "";
 
         /// <summary>
         /// 翻译文本
@@ -166,23 +168,23 @@ namespace LinePutScript.Localization.WPF
         /// <param name="key">翻译内容</param>
         /// <param name="replace">替换内容 {0:f2}{1}..</param>
         /// <returns>翻译后的文本</returns>
-        public static string Translate(this string key, params object[] replace) => string.Format(Translate(key), replace);
+        public static string Translate(this string? key, params object[] replace) => string.Format(Translate(key) ?? "", replace);
         /// <summary>
         /// 获得Double数据
         /// </summary>
-        public static double GetDouble(string key, double def = default) => Find(key)?.GetDouble() ?? def;
+        public static double GetDouble(string? key, double def = default) => Find(key)?.GetDouble() ?? def;
         /// <summary>
         /// 获得Int数据
         /// </summary>
-        public static int GetInt(string key, int def = default) => Find(key)?.GetInteger() ?? def;
+        public static int GetInt(string? key, int def = default) => Find(key)?.GetInteger() ?? def;
         /// <summary>
         /// 获得Bool数据
         /// </summary>
-        public static bool GetBool(string key, bool def = default) => Find(key)?.GetBoolean() ?? def;
+        public static bool GetBool(string? key, bool def = default) => Find(key)?.GetBoolean() ?? def;
         /// <summary>
         /// 获得Int64数据
         /// </summary>
-        public static long GetInt64(string key, long def = default) => Find(key)?.GetInteger64() ?? def;
+        public static long GetInt64(string? key, long def = default) => Find(key)?.GetInteger64() ?? def;
         /// <summary>
         /// 添加本地化语言
         /// </summary>

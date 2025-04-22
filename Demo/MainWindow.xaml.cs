@@ -38,6 +38,9 @@ namespace Demo
                 CombSelect.Items.Add(culture);
             CombSelect.SelectedItem = LocalizeCore.CurrentCulture;
 
+#if !DEBUG
+            TabMain.SelectedIndex = 1;
+#endif
             //txt1.PreviewMouseWheel += (s, e) =>
             //{
             //    txt2.ScrollToVerticalOffset(txt1.VerticalOffset);
